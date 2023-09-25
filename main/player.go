@@ -18,7 +18,7 @@ embedded_components {
   type: "sprite"
   data: "tile_set: \"/main/main.atlas\"\n"
   "default_animation: \"player_idle\"\n"
-  "material: \"/builtins/materials/sprite.material\"\n"
+  "material: \"/builtins/materials/sprite_paged_atlas.material\"\n"
   "blend_mode: BLEND_MODE_ALPHA\n"
   ""
   position {
