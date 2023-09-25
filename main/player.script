@@ -35,7 +35,7 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("collision_response") then
-		print(message.)
+		print(message.other_position)
 		print("I collided with", message.other_id)
 	end
 end
