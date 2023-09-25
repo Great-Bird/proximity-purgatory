@@ -1,0 +1,26 @@
+local SPEED = 400
+
+function init(self)
+    print("init() called")
+
+    local window_width, window_height = window.get_size()
+    local blob_width = go.get("#sprite", "size.x")
+    local blob_height = go.get("#sprite", "size.y")
+    local velocity = vmath.vector3(SPEED, SPEED, 0)
+
+    timer.delay(0.0, true, function (_, handle, time_elapsed)
+        local current_position = go.get_position()
+        if current_position.x + blob_width/2 > window_width then
+            velocity.x = -SPEED
+        elseif current_position.x - blob_width/2 < 0 then
+            velocity.x = SPEED
+        elseif current_position.y + blob_height/2 > window_height then
+            velocity.y = -SPEED
+        elseif current_position.y - blob_height/2 < 0 then
+            velocity.y = SPEED
+        end
+
+        local new_position = current_position + velocity * time_elapsed
+        go.set_position(new_position)
+    end)
+end

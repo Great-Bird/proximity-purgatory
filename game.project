@@ -10,3 +10,8 @@ height = 640
 
 [android]
 input_method = HiddenInputField
+
+[project]
+title = Proximity Purgatory
+developer = Singular BrainCell Studio
+
