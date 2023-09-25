@@ -4,7 +4,7 @@ instances {
   prototype: "/main/player.go"
   position {
     x: 51.0
-    y: 60.0
+    y: 161.0
     z: 0.0
   }
   rotation {
@@ -24,7 +24,7 @@ instances {
   prototype: "/main/wall_block.go"
   position {
     x: 16.0
-    y: 11.0
+    y: 112.0
     z: 0.0
   }
   rotation {
@@ -44,7 +44,7 @@ instances {
   prototype: "/main/wall_block.go"
   position {
     x: 48.0
-    y: 11.0
+    y: 112.0
     z: 0.0
   }
   rotation {
@@ -64,7 +64,7 @@ instances {
   prototype: "/main/wall_block.go"
   position {
     x: 80.0
-    y: 11.0
+    y: 112.0
     z: 0.0
   }
   rotation {
@@ -84,7 +84,7 @@ instances {
   prototype: "/main/wall_block.go"
   position {
     x: 112.0
-    y: 11.0
+    y: 112.0
     z: 0.0
   }
   rotation {
