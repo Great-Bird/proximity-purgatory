@@ -15,3 +15,9 @@ input_method = HiddenInputField
 title = Proximity Purgatory
 developer = Singular BrainCell Studio
 
+[sprite]
+subpixels = 0
+
+[graphics]
+default_texture_mag_filter = nearest
+
