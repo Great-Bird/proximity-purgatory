@@ -1,10 +1,10 @@
 key_trigger {
   input: KEY_D
-  action: "move_right"
+  action: "right"
 }
 key_trigger {
   input: KEY_A
-  action: "move_left"
+  action: "left"
 }
 key_trigger {
   input: KEY_SPACE
@@ -12,11 +12,11 @@ key_trigger {
 }
 key_trigger {
   input: KEY_LEFT
-  action: "move_left"
+  action: "left"
 }
 key_trigger {
   input: KEY_RIGHT
-  action: "move_right"
+  action: "right"
 }
 key_trigger {
   input: KEY_UP
