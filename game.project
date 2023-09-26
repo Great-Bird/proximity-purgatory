@@ -4,9 +4,6 @@ main_collection = /main/main.collectionc
 [script]
 shared_state = 1
 
-[display]
-height = 540
-
 [android]
 input_method = HiddenInputField
 
@@ -23,4 +20,7 @@ default_texture_mag_filter = nearest
 [physics]
 use_fixed_timestep = 1
 scale = 0.01
+
+[display]
+fullscreen = 0
 
