@@ -419,6 +419,26 @@ instances {
     z: 1.0
   }
 }
+instances {
+  id: "music"
+  prototype: "/main/music.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "go"
@@ -440,8 +460,8 @@ embedded_instances {
   "  }\n"
   "}\n"
   "components {\n"
-  "  id: \"render edit\"\n"
-  "  component: \"/main/render edit.script\"\n"
+  "  id: \"render_edit\"\n"
+  "  component: \"/main/render_edit.script\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"
@@ -600,7 +620,7 @@ embedded_instances {
   position {
     x: 329.0
     y: 397.0
-    z: -1.0
+    z: -2.0
   }
   rotation {
     x: 0.0

@@ -22,6 +22,10 @@ key_trigger {
   input: KEY_UP
   action: "jump"
 }
+key_trigger {
+  input: KEY_0
+  action: "restart"
+}
 mouse_trigger {
   input: MOUSE_BUTTON_1
   action: "touch"
