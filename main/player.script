@@ -127,33 +127,18 @@ local function resolve_collision(self, message)
 	if distance > 0 then
 		local proj = vmath.project(self.correction, normal * distance)
 		if proj < 1 then
+			print("pushing")
 			local compensation = (distance - distance * proj) * normal
 			go.set_position(go.get_position() + compensation)
 			self.correction = self.correction + compensation
 		end
 	end
 
-	-- -- Collision with wall
-	-- if math.abs(normal.x) > 0.7 then
-	-- 	-- We apparently can't get the collision box properties at runtime, so we need to
-	-- 	-- calculate the wall height based off of something else
-	-- 	local collision_box_position = go.get("#collisionobject#Box", "position")
-	-- 	local collision_box_dimensions = go.get("#collisionobject#Box", "dimensions")
-
-	-- 	local wall_height = go.get_position().y - go.get("#sprite", "size.y")/2 - message.position.y
-	-- 	print(wall_height)
-	-- 	if wall_height < CLIPUP_PIXELS then
-	-- 		-- Instead of stopping movement completely, move the character on top of small ledges
-	-- 		go.set_position(go.get_position() + vmath.vector3(0, wall_height, 0))
-	-- 	else
-	-- 		self.wall_contact = true
-	-- 		self.velocity.x = 0
-	-- 	end
-	-- end
-
 	-- collided with a wall
 	-- stop horizontal movement
-	if math.abs(normal.x) > 0.7 then
+	-- the distance check is a workaround for the character getting stuck while walking on adjacent platforms
+	-- on the same Y level
+	if math.abs(normal.x) > 0.7 and distance > 0.1 then
 		self.wall_contact = true
 		self.velocity.x = 0
 	end
