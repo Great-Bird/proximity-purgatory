@@ -24,13 +24,13 @@ local function create_marker(self, pos, time)
 		local a = table.remove(self.debug_markers, 1)
 		msg.post(a, "disable")
 	end
-	
+
 	local sprite_url = msg.url(nil, marker_id, "sprite")
 	go.set(sprite_url, "tint", vmath.vector4(1, 0, 0, 1))
 
 	table.insert(self.debug_markers, marker_id)
 
-	timer.delay(time, false, function ()
+	timer.delay(time, false, function()
 		if marker_id then
 			local index = find(self.debug_markers, marker_id)
 			if index then
@@ -45,7 +45,7 @@ local function set_default_state(self)
 	self.velocity = vmath.vector3()
 	self.correction = vmath.vector3()
 	self.faced_direction = 1
-	self.standing = true
+	self.ground_contact = true
 	self.wall_contact = false
 
 	go.set_position(vmath.vector3(62, 226, 0))
@@ -53,9 +53,9 @@ end
 
 function init(self)
 	self.debug_markers = {}
-	
+
 	set_default_state(self)
-	
+
 	msg.post(".", "acquire_input_focus")
 end
 
@@ -67,23 +67,18 @@ function fixed_update(self, dt)
 	update_animations(self)
 
 	local offset = self.velocity * dt
-	
-	if not self.standing then
+
+	if not self.ground_contact then
 		self.velocity = self.velocity + GRAVITY_PIXELS_PER_SECOND * dt
 		-- Don't allow falling faster than gravity
 		self.velocity.y = math.max(self.velocity.y, GRAVITY_PIXELS_PER_SECOND.y)
 	end
-	
-	go.set_position(go.get_position() + offset)
 
-	print(self.wall_contact)
+	go.set_position(go.get_position() + offset)
 
 	self.correction = vmath.vector3()
 	self.wall_contact = false
-	if false then
-		-- TODO: Set standing to false if there are no platforms underneath the character
-		self.standing = false
-	end
+	self.ground_contact = false
 end
 
 local function walk(self, direction)
@@ -96,10 +91,10 @@ local function walk(self, direction)
 end
 
 local function jump(self)
-	if not self.standing then
+	if not self.ground_contact then
 		return
 	end
-	self.standing = false
+	self.ground_contact = false
 	self.velocity.y = JUMP_TAKEOFF_SPEED
 end
 
@@ -127,7 +122,7 @@ end
 local function resolve_collision(self, message)
 	local distance = message.distance
 	local normal = message.normal
-	
+
 	-- Push the character out of any obstacles
 	if distance > 0 then
 		local proj = vmath.project(self.correction, normal * distance)
@@ -137,32 +132,40 @@ local function resolve_collision(self, message)
 			self.correction = self.correction + compensation
 		end
 	end
-	
-	-- Collision with wall
-	if math.abs(normal.x) > 0.7 then
-		-- We apparently can't get the collision box properties at runtime, so we need to 
-		-- calculate the wall height based off of something else
-		local collision_box_position = go.get("#collisionobject#Box", "position")
-		local collision_box_dimensions = go.get("#collisionobject#Box", "dimensions")
 
-		local wall_height = go.get_position().y - go.get("#sprite", "size.y")/2 - message.position.y
-		print(wall_height)
-		if wall_height < CLIPUP_PIXELS then
-			-- Instead of stopping movement completely, move the character on top of small ledges
-			go.set_position(go.get_position() + vmath.vector3(0, wall_height, 0))
-		else
-			self.wall_contact = true
-			self.velocity.x = 0
-		end
+	-- -- Collision with wall
+	-- if math.abs(normal.x) > 0.7 then
+	-- 	-- We apparently can't get the collision box properties at runtime, so we need to
+	-- 	-- calculate the wall height based off of something else
+	-- 	local collision_box_position = go.get("#collisionobject#Box", "position")
+	-- 	local collision_box_dimensions = go.get("#collisionobject#Box", "dimensions")
+
+	-- 	local wall_height = go.get_position().y - go.get("#sprite", "size.y")/2 - message.position.y
+	-- 	print(wall_height)
+	-- 	if wall_height < CLIPUP_PIXELS then
+	-- 		-- Instead of stopping movement completely, move the character on top of small ledges
+	-- 		go.set_position(go.get_position() + vmath.vector3(0, wall_height, 0))
+	-- 	else
+	-- 		self.wall_contact = true
+	-- 		self.velocity.x = 0
+	-- 	end
+	-- end
+
+	-- collided with a wall
+	-- stop horizontal movement
+	if math.abs(normal.x) > 0.7 then
+		self.wall_contact = true
+		self.velocity.x = 0
 	end
-	
-	-- Collision with ground
+	-- collided with the ground
+	-- stop vertical movement
 	if normal.y > 0.7 then
-		self.standing = true
+		self.ground_contact = true
 		self.velocity.y = 0
 	end
-	-- Collision with ceiling
-	if normal.y < -0.7 and self.velocity.y > 0 then
+	-- collided with the ceiling
+	-- stop vertical movement
+	if normal.y < -0.7 then
 		self.velocity.y = 0
 	end
 end
