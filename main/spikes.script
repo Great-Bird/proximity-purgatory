@@ -1,12 +1,41 @@
+local math_util = require "main.math_util"
+
 local MSG_CONTACT_POINT_RESPONSE = hash("contact_point_response")
+
+local DAMAGE_SOURCE = "spikes"
+local DELETE_POINT = -250
+
+local speed = 320
+
+function init(self)
+    self.speed = speed
+    self.original_pos = go.get_position().x
+    self.distance = self.original_pos - DELETE_POINT
+    self.time = self.distance / self.speed
+
+    local function delete()
+        local current_x = go.get_position().x
+        if current_x + self.distance < self.original_pos then
+            go.delete()
+        else
+            timer.delay((current_x - DELETE_POINT) / self.speed, false, delete)
+        end
+    end
+
+    timer.delay(self.time, false, delete)
+end
+
+function update(self, dt)
+    go.set_position(go.get_position() + vmath.vector3(-self.speed * dt, 0, 0))
+end
 
 function on_message(self, message_id, message, sender)
     local player_go = go.get_id("player")
     local gui_go = go.get_id("UI")
     if message_id == MSG_CONTACT_POINT_RESPONSE then
         if message.other_id == player_go then
-            msg.post(player_go, "damage", { source = "spikes" })
-            msg.post(gui_go, "damage", { source = "spikes" })
+            msg.post(player_go, "damage", { source = DAMAGE_SOURCE })
+            msg.post(gui_go, "damage", { source = DAMAGE_SOURCE })
         end
     end
 end

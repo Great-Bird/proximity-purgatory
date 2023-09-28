@@ -5,6 +5,7 @@ local ANIM_PUNCH = hash("player_punch")
 local ANIM_SLASH = hash("player_slash")
 local MSG_DAMAGE = hash("damage")
 local MSG_CONTACT_POINT_RESPONSE = hash("contact_point_response")
+local MSG_START = hash("start")
 local INPUT_LEFT = hash("left")
 local INPUT_RIGHT = hash("right")
 local INPUT_JUMP = hash("jump")
@@ -111,7 +112,11 @@ end
 
 local function jump(self)
 	if not self.ground_contact then
-		return
+		if self.double_jumped then
+			return
+		else
+			self.double_jumped = true
+		end
 	end
 	self.ground_contact = false
 	self.velocity.y = JUMP_TAKEOFF_SPEED
@@ -167,6 +172,7 @@ local function resolve_collision(self, message)
 	-- stop vertical movement
 	if normal.y > 0.7 then
 		self.ground_contact = true
+		self.double_jumped = false
 		self.velocity.y = 0
 	end
 	-- collided with the ceiling
@@ -184,5 +190,7 @@ function on_message(self, message_id, message, sender)
 		end
 	elseif message_id == MSG_DAMAGE then
 		print("took damage from", message.source)
+	elseif message_id == MSG_START then
+		print("start")
 	end
 end

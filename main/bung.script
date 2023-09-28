@@ -1,9 +1,16 @@
+local math_util = require "main.math_util"
+
 local MSG_CONTACT_POINT_RESPONSE = hash("contact_point_response")
 
+local DAMAGE_SOURCE = "bung"
 local DELETE_POINT = -250
 
+local speed_min = 500
+local speed_max = 700
+local speed_snap = 25
+
 function init(self)
-    self.speed = 500
+    self.speed = math_util.random_snap(speed_min, speed_max, speed_snap)
     self.original_pos = go.get_position().x
     self.distance = self.original_pos - DELETE_POINT
     self.time = self.distance / self.speed
@@ -12,7 +19,6 @@ function init(self)
         local current_x = go.get_position().x
         if current_x + self.distance < self.original_pos then
             go.delete()
-            print("ay")
         else
             timer.delay((current_x - DELETE_POINT) / self.speed, false, delete)
         end
@@ -30,8 +36,8 @@ function on_message(self, message_id, message, sender)
     local gui_go = go.get_id("UI")
     if message_id == MSG_CONTACT_POINT_RESPONSE then
         if message.other_id == player_go then
-            msg.post(player_go, "damage", { source = "bung" })
-            msg.post(gui_go, "damage", { source = "bung" })
+            msg.post(player_go, "damage", { source = DAMAGE_SOURCE })
+            msg.post(gui_go, "damage", { source = DAMAGE_SOURCE })
         end
     end
 end

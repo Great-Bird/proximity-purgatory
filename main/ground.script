@@ -3,11 +3,11 @@ local ground_pieces = { "ground0", "ground1", "ground2", "ground3",
 local ground_piece_size_x = 158
 
 function init(self)
-	self.speed = 240
+	self.speed = 320
 end
 
 function update(self, dt)
-	local offset_amount = math.floor(self.speed * dt)
+	local offset_amount = self.speed * dt
 	for i, p in ipairs(ground_pieces) do
 		local pos = go.get_position(p)
 		if pos.x <= -ground_piece_size_x * 1.5 then

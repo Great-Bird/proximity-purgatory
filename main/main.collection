@@ -260,26 +260,6 @@ instances {
   }
 }
 instances {
-  id: "spikes1"
-  prototype: "/main/spikes.go"
-  position {
-    x: 497.0
-    y: 178.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 2.0
-    y: 2.0
-    z: 1.0
-  }
-}
-instances {
   id: "sky0"
   prototype: "/main/sky.go"
   position {
@@ -376,6 +356,46 @@ instances {
   scale3 {
     x: 8.0
     y: 8.0
+    z: 1.0
+  }
+}
+instances {
+  id: "wall_block"
+  prototype: "/main/wall_block.go"
+  position {
+    x: -64.0
+    y: 512.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "wall_block1"
+  prototype: "/main/wall_block.go"
+  position {
+    x: 1028.0
+    y: 512.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
     z: 1.0
   }
 }
@@ -691,7 +711,63 @@ embedded_instances {
   ""
   position {
     x: 1264.0
-    y: 190.0
+    y: 180.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "spawn_spikes"
+  data: "components {\n"
+  "  id: \"spike_controller\"\n"
+  "  component: \"/main/spike_controller.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "  property_decls {\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"spike_factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/main/spikes.go\\\"\\n"
+  "load_dynamically: false\\n"
+  "dynamic_prototype: false\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 1264.0
+    y: 180.0
     z: 0.0
   }
   rotation {
