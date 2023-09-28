@@ -6,10 +6,11 @@ local scoretext
 
 local function increase_score()
 	score = score + 1
+	
 	gui.set_text(scoretext, "SCORE: "..tostring(score))
 end
 
-function init(self)
+function init(self)	
 	frame = gui.get_node("COVER")
 	button = gui.get_node("START")
 	scoretext = gui.get_node("SCORE")
