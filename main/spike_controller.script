@@ -15,7 +15,7 @@ function update(self, dt)
     if self.elapsed_time >= self.next_spawn then
         self.next_spawn = self.next_spawn + math_util.random_snap(spawn_time_min, spawn_time_max, spawn_time_snap)
 
-        local spawn_pos = go.get_position()
+        local spawn_pos = go.get_position() + vmath.vector3(0, 0, -0.5)
         local id = factory.create("#spike_factory", spawn_pos)
         go.set_scale(2, id)
     end
