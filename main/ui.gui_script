@@ -15,8 +15,10 @@ local function increase_score()
 		score = score + 1
 		gui.set_text(scoretext, "SCORE: "..tostring(score))
 
-		if score == 3000 then
+		if score == 400 then
+			INCREASE_SCORE = false
 			msg.post("ground_controller#ground", "win")
+			gui.set_text(scoretext, "SCORE: MY HERO!!!!!!!!")
 		end
 	end
 end
