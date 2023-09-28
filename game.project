@@ -8,7 +8,7 @@ shared_state = 1
 input_method = HiddenInputField
 
 [project]
-title = Proximity Purgatory
+title = The Bunginator
 developer = Singular BrainCell Studio
 
 [sprite]
