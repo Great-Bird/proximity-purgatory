@@ -1,8 +1,13 @@
 local score = 0
 
 local frame 
-local button 
+local start 
 local scoretext 
+local restartbutton
+local gameover
+local youdied
+
+local MSG_DAMAGE = hash("damage")
 
 local function increase_score()
 	score = score + 1
@@ -10,24 +15,53 @@ local function increase_score()
 	gui.set_text(scoretext, "SCORE: "..tostring(score))
 end
 
+function on_message(self, message_id, message, sender)
+	if message_id == MSG_DAMAGE then
+		local enable = {
+			[1] = restartbutton,
+			[2] = gameover,
+			[3] = youdied,
+			[4] = frame,
+		}
+
+		for _, node in pairs(enable) do
+			gui.set_enabled(node, true)
+		end
+	end
+end
+
 function init(self)	
 	frame = gui.get_node("COVER")
-	button = gui.get_node("START")
+	start = gui.get_node("START")
 	scoretext = gui.get_node("SCORE")
+	restartbutton = gui.get_node("RESTART")
+	gameover = gui.get_node("GAMEOVER")
+	youdied = gui.get_node("YOUDIED")
 	
 	msg.post(".", "acquire_input_focus")
+	
 	timer.delay(0.05, true, increase_score)
 end
 
-function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
 function on_input(self, action_id, action)
-	if gui.pick_node(button, action.x, action.y) and action.released and action_id == hash("touch") then
-		gui.set_alpha(frame, 0)
-		gui.set_alpha(button, 0)
+	if gui.pick_node(start, action.x, action.y) and action.released and action_id == hash("touch") then
+		if gui.is_enabled(start) == true and gui.is_enabled(restartbutton) == false then
+			gui.set_enabled(frame, false)
+			gui.set_enabled(start, false)
+
+			local postTo = {
+				"player#player",
+				"ground_controller#ground",
+				"music#music",
+				"sky_controller#sky",
+				"spawn_bungs#bung_controller",
+				"spikes#spikes",
+			}
+
+			for _, receiver in pairs(postTo) do
+				msg.post(receiver, "start")
+			end
+		end
 	end
 end
+
