@@ -34,6 +34,10 @@ images {
   image: "/assets/cage.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
+images {
+  image: "/assets/spikes.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
 animations {
   id: "player_idle"
   images {
