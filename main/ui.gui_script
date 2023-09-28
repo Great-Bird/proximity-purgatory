@@ -20,22 +20,26 @@ local postTo = {
 	"spawn_spikes#spike_controller",
 }
 
+local function enableThisGarbage()
+	local enable = {
+		[1] = restartbutton,
+		[2] = gameover,
+		[3] = youdied,
+		[4] = frame,
+	}
+
+	for _, node in pairs(enable) do
+		gui.set_enabled(node, true)
+	end
+end
+
 function on_message(self, message_id, message, sender)
 	if message_id == MSG_DAMAGE then
-		local enable = {
-			[1] = restartbutton,
-			[2] = gameover,
-			[3] = youdied,
-			[4] = frame,
-		}
-
-		for _, node in pairs(enable) do
-			gui.set_enabled(node, true)
-		end
-
 		INCREASE_SCORE = false
 		self.score = 0
 		self.elapsed_time = 0
+
+		timer.delay(2, false, enableThisGarbage)
 	end
 end
 
