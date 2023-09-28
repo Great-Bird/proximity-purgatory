@@ -31,7 +31,7 @@ function update(self, dt)
     end
 
     if self.spawning then
-        self.speed = math_util.lerp(260, 660, self.elapsed_time / 10)
+        self.speed = math_util.lerp(260, 660, self.elapsed_time / 100)
         for _, spike in ipairs(self.bungs) do
             go.set_position(go.get_position(spike) + vmath.vector3(-self.speed * dt, 0, 0), spike)
         end

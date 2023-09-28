@@ -20,7 +20,7 @@ function update(self, dt)
 	self.accumulated_time = self.accumulated_time + dt
 
 	if self.speeding_up then
-		self.speed = math_util.lerp(260, 660, self.accumulated_time / 10)
+		self.speed = math_util.lerp(260, 660, self.accumulated_time / 100)
 	end
 
 	local offset_amount = -self.speed * dt
