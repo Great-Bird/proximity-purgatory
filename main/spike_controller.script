@@ -31,7 +31,9 @@ end
 function on_message(self, message_id, message, sender)
     if message_id == hash("damage") then
         for _, id in ipairs(self.bungs) do
-            msg.post(id, "damage", message)
+            if go.exists(id) then
+                msg.post(id, "damage", message)
+            end
         end
         self.spawning = false
     elseif message_id == hash("start") then
@@ -40,7 +42,7 @@ function on_message(self, message_id, message, sender)
         self.next_spawn = 1
         for i = #self.bungs, 1, -1 do
             local id = self.bungs[i]
-            if id then
+            if id and go.exists(id) then
                 go.delete(id)
             end
             self.bungs[i] = nil

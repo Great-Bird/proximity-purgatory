@@ -8,8 +8,18 @@ local size_max = 1.2
 local size_snap = 0.1
 
 local spawn_time_min = 0.5
-local spawn_time_max = 3
+local spawn_time_max = 4
 local spawn_time_snap = 0.5
+
+local function set_defaults(self)
+    size_min = 0.8
+    size_max = 1.2
+    size_snap = 0.1
+
+    spawn_time_min = 1.5
+    spawn_time_max = 4
+    spawn_time_snap = 0.5
+end
 
 function init(self)
     self.spawning = false
@@ -18,11 +28,21 @@ function init(self)
     self.bungs = {}
 end
 
+local function lerp(a, b, t)
+    t = math.min(math.max(t, 0), 1)
+    return a * (1 - t) + (b * t)
+end
+
 function update(self, dt)
     if not self.spawning then
         return
     end
     self.elapsed_time = self.elapsed_time + dt
+
+    size_min = lerp(0.8, 1.2, self.elapsed_time / 100)
+    size_max = lerp(1.2, 1.5, self.elapsed_time / 100)
+    spawn_time_min = lerp(1.5, 0.5, self.elapsed_time / 80)
+    spawn_time_max = lerp(4, 3, self.elapsed_time / 80)
 
     if self.elapsed_time >= self.next_spawn then
         self.next_spawn = self.next_spawn + math_util.random_snap(spawn_time_min, spawn_time_max, spawn_time_snap)
@@ -37,7 +57,9 @@ end
 function on_message(self, message_id, message, sender)
     if message_id == hash("damage") then
         for _, id in ipairs(self.bungs) do
-            msg.post(id, "damage", message)
+            if go.exists(id) then
+                msg.post(id, "damage", message)
+            end
         end
         self.spawning = false
     elseif message_id == hash("start") then
@@ -46,11 +68,16 @@ function on_message(self, message_id, message, sender)
         self.next_spawn = 1
         for i = #self.bungs, 1, -1 do
             local id = self.bungs[i]
-            if id then
+            if id and go.exists(id) then
                 go.delete(id)
             end
             self.bungs[i] = nil
         end
+        set_defaults(self)
+
+        self.spawning = true
+        self.elapsed_time = 0
+        self.next_spawn = 1
     elseif message_id == hash("win") then
         self.spawning = false
     end

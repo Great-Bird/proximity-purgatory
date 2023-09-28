@@ -148,6 +148,10 @@ local function abort_jump(self)
 end
 
 function on_input(self, action_id, action)
+	if not self.updating then
+		return
+	end
+
 	if action_id == INPUT_LEFT then
 		walk(self, -action.value)
 	elseif action_id == INPUT_RIGHT then
