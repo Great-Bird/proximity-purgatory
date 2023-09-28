@@ -1,4 +1,4 @@
-local TIME_TO_HERO = 60 * 2 + 29
+local TIME_TO_HERO = 2--60 * 2 + 24
 local MAX_SCORE = 3000
 
 local frame 
@@ -57,8 +57,8 @@ function init(self)
 end
 
 function update(self, dt)
-	self.elapsed_time = self.elapsed_time + dt
 	if INCREASE_SCORE then
+		self.elapsed_time = self.elapsed_time + dt
 		self.score = math.min(math.ceil(self.elapsed_time / TIME_TO_HERO * MAX_SCORE), MAX_SCORE)
 		gui.set_text(scoretext, "SCORE: "..tostring(self.score))
 

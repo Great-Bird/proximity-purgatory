@@ -45,5 +45,7 @@ function on_message(self, message_id, message, sender)
             end
             self.bungs[i] = nil
         end
+    elseif message_id == hash("win") then
+        self.spawning = false
     end
 end

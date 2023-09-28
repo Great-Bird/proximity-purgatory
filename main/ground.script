@@ -31,10 +31,17 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("win") then
-		timer.delay(2, false, function()
-			self.moving = false
+		timer.delay(5, false, function()
+			if self.moving then
+				timer.delay(2, false, function()
+					self.moving = false
+					timer.delay(3, false, function()
+						go.animate("cage#sprite", "tint", go.PLAYBACK_ONCE_FORWARD, vmath.vector4(0, 0, 0, 0), go.EASING_OUTSINE, 2)
+					end)
+				end)
+				self.move_princess = true
+			end
 		end)
-		self.move_princess = true
 	elseif message_id == hash("damage") then
 		self.moving = false
 	elseif message_id == hash("start") then

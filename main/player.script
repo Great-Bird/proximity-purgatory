@@ -54,6 +54,7 @@ local function set_default_state(self)
 	self.faced_direction = 1
 	self.ground_contact = true
 	self.wall_contact = false
+	self.running = true
 
 	go.set_position(vmath.vector3(62, 226, 0))
 end
@@ -71,9 +72,21 @@ local function update_animations(self)
 	sprite.set_hflip("#sprite", self.faced_direction < 0)
 
 	if self.ground_contact then
-		if self.anim ~= ANIM_RUN then
-			sprite.play_flipbook("#sprite", ANIM_RUN)
-			self.anim = ANIM_RUN
+		if self.running then
+			if self.anim ~= ANIM_RUN then
+				sprite.play_flipbook("#sprite", ANIM_RUN)
+				self.anim = ANIM_RUN
+			end
+		else
+			if math.abs(self.velocity.x) > 0.1 then
+				if self.anim ~= ANIM_RUN then
+					sprite.play_flipbook("#sprite", ANIM_RUN)
+					self.anim = ANIM_RUN
+				end
+			else
+				sprite.play_flipbook("#sprite", ANIM_IDLE)
+				self.anim = ANIM_IDLE
+			end
 		end
 	else
 		if self.anim ~= ANIM_JUMP then
@@ -199,5 +212,9 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == MSG_START then
 		set_default_state(self)
 		self.updating = true
+	elseif message_id == hash("win") then
+		timer.delay(5, false, function ()
+			self.running = false
+		end)
 	end
 end
