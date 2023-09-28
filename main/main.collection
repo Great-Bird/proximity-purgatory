@@ -415,7 +415,7 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: 958.0
+    x: 1906.0
     y: 137.0
     z: 0.0
   }
@@ -460,7 +460,7 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: 957.0
+    x: 1905.0
     y: -1.0
     z: 0.5
   }
@@ -721,8 +721,8 @@ embedded_instances {
   "blend_mode: BLEND_MODE_ALPHA\\n"
   "\"\n"
   "  position {\n"
-  "    x: 126.5\n"
-  "    y: 56.0\n"
+  "    x: 119.5\n"
+  "    y: 63.5\n"
   "    z: 0.0\n"
   "  }\n"
   "  rotation {\n"
@@ -782,7 +782,7 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: 0.0
+    x: 1925.0
     y: 0.0
     z: 0.0
   }
