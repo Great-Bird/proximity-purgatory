@@ -4,7 +4,7 @@ instances {
   prototype: "/main/player.go"
   position {
     x: 62.0
-    y: 226.0
+    y: 210.0
     z: 0.0
   }
   rotation {
@@ -44,7 +44,7 @@ instances {
   prototype: "/main/ground.go"
   position {
     x: 0.0
-    y: 0.0
+    y: 70.0
     z: 0.0
   }
   rotation {
@@ -64,7 +64,7 @@ instances {
   prototype: "/main/ground.go"
   position {
     x: 158.0
-    y: 0.0
+    y: 70.0
     z: 0.0
   }
   rotation {
@@ -84,7 +84,7 @@ instances {
   prototype: "/main/ground.go"
   position {
     x: 316.0
-    y: 0.0
+    y: 70.0
     z: 0.0
   }
   rotation {
@@ -104,7 +104,7 @@ instances {
   prototype: "/main/ground.go"
   position {
     x: 474.0
-    y: 0.0
+    y: 70.0
     z: 0.0
   }
   rotation {
@@ -124,7 +124,7 @@ instances {
   prototype: "/main/ground.go"
   position {
     x: 632.0
-    y: 0.0
+    y: 70.0
     z: 0.0
   }
   rotation {
@@ -144,7 +144,7 @@ instances {
   prototype: "/main/ground.go"
   position {
     x: 790.0
-    y: 0.0
+    y: 70.0
     z: 0.0
   }
   rotation {
@@ -164,7 +164,7 @@ instances {
   prototype: "/main/ground.go"
   position {
     x: 948.0
-    y: 0.0
+    y: 70.0
     z: 0.0
   }
   rotation {
@@ -184,7 +184,7 @@ instances {
   prototype: "/main/ground.go"
   position {
     x: 1106.0
-    y: 0.0
+    y: 70.0
     z: 0.0
   }
   rotation {
@@ -203,8 +203,8 @@ instances {
   id: "ground8"
   prototype: "/main/ground.go"
   position {
-    x: -316.0
-    y: 0.0
+    x: 1264.0
+    y: 70.0
     z: 0.0
   }
   rotation {
@@ -223,8 +223,8 @@ instances {
   id: "ground9"
   prototype: "/main/ground.go"
   position {
-    x: -158.0
-    y: 0.0
+    x: 1422.0
+    y: 70.0
     z: 0.0
   }
   rotation {
@@ -352,7 +352,7 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "sky"
+  id: "sky0"
   data: "embedded_components {\n"
   "  id: \"sprite\"\n"
   "  type: \"sprite\"\n"
@@ -362,49 +362,9 @@ embedded_instances {
   "blend_mode: BLEND_MODE_ALPHA\\n"
   "\"\n"
   "  position {\n"
-  "    x: 49.0\n"
-  "    y: 0.0\n"
-  "    z: 0.1\n"
-  "  }\n"
-  "  rotation {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"
   "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"sprite1\"\n"
-  "  type: \"sprite\"\n"
-  "  data: \"tile_set: \\\"/main/main.atlas\\\"\\n"
-  "default_animation: \\\"background2\\\"\\n"
-  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
-  "blend_mode: BLEND_MODE_ALPHA\\n"
-  "\"\n"
-  "  position {\n"
-  "    x: 127.97619\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"sprite2\"\n"
-  "  type: \"sprite\"\n"
-  "  data: \"tile_set: \\\"/main/main.atlas\\\"\\n"
-  "default_animation: \\\"background2\\\"\\n"
-  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
-  "blend_mode: BLEND_MODE_ALPHA\\n"
-  "\"\n"
-  "  position {\n"
-  "    x: -30.0\n"
-  "    y: 0.0\n"
-  "    z: 0.1\n"
   "  }\n"
   "  rotation {\n"
   "    x: 0.0\n"
@@ -415,8 +375,8 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: 277.0
-    y: 372.0
+    x: 0.0
+    y: 455.0
     z: -0.5
   }
   rotation {
@@ -442,8 +402,8 @@ embedded_instances {
   "blend_mode: BLEND_MODE_ALPHA\\n"
   "\"\n"
   "  position {\n"
-  "    x: 142.0\n"
-  "    y: 229.0\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
   "    z: 0.0\n"
   "  }\n"
   "  rotation {\n"
@@ -452,16 +412,11 @@ embedded_instances {
   "    z: 0.0\n"
   "    w: 1.0\n"
   "  }\n"
-  "  scale {\n"
-  "    x: 2.202694\n"
-  "    y: 2.377853\n"
-  "    z: 1.0\n"
-  "  }\n"
   "}\n"
   ""
   position {
-    x: 397.0
-    y: 16.0
+    x: 958.0
+    y: 137.0
     z: 0.0
   }
   rotation {
@@ -471,8 +426,8 @@ embedded_instances {
     w: 1.0
   }
   scale3 {
-    x: 1.0
-    y: 1.0
+    x: 1.5
+    y: 1.5
     z: 1.0
   }
 }
@@ -487,8 +442,8 @@ embedded_instances {
   "blend_mode: BLEND_MODE_ALPHA\\n"
   "\"\n"
   "  position {\n"
-  "    x: 535.0\n"
-  "    y: 254.0\n"
+  "    x: 0.0\n"
+  "    y: 162.0\n"
   "    z: 0.0\n"
   "  }\n"
   "  rotation {\n"
@@ -498,15 +453,15 @@ embedded_instances {
   "    w: 1.0\n"
   "  }\n"
   "  scale {\n"
-  "    x: 3.0\n"
-  "    y: 3.0\n"
-  "    z: 1.0E-6\n"
+  "    x: 2.0\n"
+  "    y: 2.0\n"
+  "    z: 1.0\n"
   "  }\n"
   "}\n"
   ""
   position {
-    x: 0.0
-    y: 0.0
+    x: 957.0
+    y: -1.0
     z: 0.5
   }
   rotation {
@@ -555,6 +510,203 @@ embedded_instances {
   scale3 {
     x: 1.0
     y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "sky1"
+  data: "embedded_components {\n"
+  "  id: \"sprite\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"tile_set: \\\"/main/main.atlas\\\"\\n"
+  "default_animation: \\\"background2\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "blend_mode: BLEND_MODE_ALPHA\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 632.0
+    y: 455.0
+    z: -0.5
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 8.0
+    y: 8.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "sky2"
+  data: "embedded_components {\n"
+  "  id: \"sprite\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"tile_set: \\\"/main/main.atlas\\\"\\n"
+  "default_animation: \\\"background2\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "blend_mode: BLEND_MODE_ALPHA\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 1264.0
+    y: 455.0
+    z: -0.5
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 8.0
+    y: 8.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "sky_controller"
+  data: "components {\n"
+  "  id: \"sky\"\n"
+  "  component: \"/main/sky.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "  property_decls {\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "sky3"
+  data: "embedded_components {\n"
+  "  id: \"sprite\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"tile_set: \\\"/main/main.atlas\\\"\\n"
+  "default_animation: \\\"background2\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "blend_mode: BLEND_MODE_ALPHA\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 1896.0
+    y: 455.0
+    z: -0.5
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 8.0
+    y: 8.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "sky4"
+  data: "embedded_components {\n"
+  "  id: \"sprite\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"tile_set: \\\"/main/main.atlas\\\"\\n"
+  "default_animation: \\\"background2\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "blend_mode: BLEND_MODE_ALPHA\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 2528.0
+    y: 455.0
+    z: -0.5
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 8.0
+    y: 8.0
     z: 1.0
   }
 }

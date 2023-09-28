@@ -1,0 +1,20 @@
+local SPEED = 60
+
+local pieces = { "sky0", "sky1", "sky2", "sky3", "sky4" }
+local piece_size_x = 79*8
+
+function init(self)
+	self.speed = SPEED
+end
+
+function fixed_update(self, dt)
+	local offset_amount = math.floor(self.speed * dt)
+	for i, p in ipairs(pieces) do
+		local pos = go.get_position(p)
+		if pos.x <= -piece_size_x * 1.5 then
+			pos.x = pos.x + (#pieces - 1) * piece_size_x
+		end
+		pos.x = pos.x - offset_amount
+		go.set_position(pos, p)
+	end
+end
