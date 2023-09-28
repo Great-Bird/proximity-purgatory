@@ -22,6 +22,9 @@ function on_message(self, message_id, message, sender)
 		for _, node in pairs(enable) do
 			gui.set_enabled(node, true)
 		end
+
+		INCREASE_SCORE = false
+		self.score = 0
 	end
 end
 
@@ -40,8 +43,10 @@ end
 
 function update(self, dt)
 	self.elapsed_time = self.elapsed_time + dt
-	self.score = math.min(math.ceil(self.elapsed_time / TIME_TO_HERO * MAX_SCORE), MAX_SCORE)
-	gui.set_text(scoretext, "SCORE: "..tostring(self.score))
+	if INCREASE_SCORE then
+		self.score = math.min(math.ceil(self.elapsed_time / TIME_TO_HERO * MAX_SCORE), MAX_SCORE)
+		gui.set_text(scoretext, "SCORE: "..tostring(self.score))
+	end
 end
 
 function on_input(self, action_id, action)
@@ -62,6 +67,8 @@ function on_input(self, action_id, action)
 			for _, receiver in pairs(postTo) do
 				msg.post(receiver, "start")
 			end
+
+			INCREASE_SCORE = true
 		end
 	elseif gui.pick_node(restartbutton, action.x, action.y) and gui.is_enabled(restartbutton) == true then	
 		if action.released and action_id == hash("touch") then
@@ -82,6 +89,8 @@ function on_input(self, action_id, action)
 			for _, receiver in pairs(postTo) do
 				msg.post(receiver, "start")
 			end
+
+			INCREASE_SCORE = true
 		end	
 	end
 end
