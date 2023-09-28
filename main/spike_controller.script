@@ -1,0 +1,22 @@
+local math_util = require "main.math_util"
+
+local spawn_time_min = 1
+local spawn_time_max = 4
+local spawn_time_snap = 1
+
+function init(self)
+    self.elapsed_time = 0
+    self.next_spawn = 1
+end
+
+function update(self, dt)
+    self.elapsed_time = self.elapsed_time + dt
+
+    if self.elapsed_time >= self.next_spawn then
+        self.next_spawn = self.next_spawn + math_util.random_snap(spawn_time_min, spawn_time_max, spawn_time_snap)
+
+        local spawn_pos = go.get_position()
+        local id = factory.create("#spike_factory", spawn_pos)
+        go.set_scale(2, id)
+    end
+end
