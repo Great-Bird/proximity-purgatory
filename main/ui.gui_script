@@ -1,5 +1,5 @@
-local TIME_TO_HERO = 60 * 2 + 24
-local MAX_SCORE = 3000
+local TIME_TO_HERO = 18
+local MAX_SCORE = 10000000000
 
 local frame 
 local start 
@@ -31,6 +31,11 @@ local function enableThisGarbage()
 	for _, node in pairs(enable) do
 		gui.set_enabled(node, true)
 	end
+end
+
+local function graph(input)
+	local output = 1.1^input
+	return output
 end
 
 function on_message(self, message_id, message, sender)
@@ -69,10 +74,13 @@ end
 function update(self, dt)
 	if INCREASE_SCORE then
 		self.elapsed_time = self.elapsed_time + dt
-		self.score = math.min(math.ceil(self.elapsed_time / TIME_TO_HERO * MAX_SCORE), MAX_SCORE)
+		local score = graph(self.elapsed_time)
+		self.score = math.min(math.ceil(score, MAX_SCORE))
 		gui.set_text(scoretext, "SCORE: "..tostring(self.score))
 
-		if self.score == MAX_SCORE then
+		print(TIME_TO_HERO - self.elapsed_time)
+		
+		if self.score >= MAX_SCORE then
 			INCREASE_SCORE = false
 			timer.delay(5, false, setThatShiTroy)
 
