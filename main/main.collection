@@ -240,26 +240,6 @@ instances {
   }
 }
 instances {
-  id: "spikes"
-  prototype: "/main/spikes.go"
-  position {
-    x: 474.0
-    y: 177.0
-    z: -0.5
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 2.0
-    y: 2.0
-    z: 1.0
-  }
-}
-instances {
   id: "sky0"
   prototype: "/main/sky.go"
   position {
