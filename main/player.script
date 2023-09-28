@@ -189,7 +189,7 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == MSG_CONTACT_POINT_RESPONSE then
-		if message.group == GROUP_OBSTACLES then
+		if message.group == GROUP_OBSTACLES and self.updating then
 			resolve_collision(self, message)
 			-- create_marker(self, message.position, 0.5)
 		end
