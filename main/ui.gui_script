@@ -1,4 +1,4 @@
-local TIME_TO_HERO = 18
+local TIME_TO_HERO = 60*2 + 24
 local MAX_SCORE = 10000000000
 
 local frame 
@@ -33,9 +33,13 @@ local function enableThisGarbage()
 	end
 end
 
-local function graph(input)
-	local output = 1.1^input
-	return output
+local function map(num, in_min, in_max, out_min, out_max)
+	local slope = (out_max - out_min) / (in_max - in_min)
+	return out_min + slope * (num - in_min)
+end
+
+local function get_score(x)
+	return 1.1547819847^x - 1
 end
 
 function on_message(self, message_id, message, sender)
@@ -74,11 +78,9 @@ end
 function update(self, dt)
 	if INCREASE_SCORE then
 		self.elapsed_time = self.elapsed_time + dt
-		local score = graph(self.elapsed_time)
-		self.score = math.min(math.ceil(score, MAX_SCORE))
+		local score = get_score(map(self.elapsed_time, 0, TIME_TO_HERO, 0, 144))
+		self.score = math.min(math.floor(score), MAX_SCORE)
 		gui.set_text(scoretext, "SCORE: "..tostring(self.score))
-
-		print(TIME_TO_HERO - self.elapsed_time)
 		
 		if self.score >= MAX_SCORE then
 			INCREASE_SCORE = false

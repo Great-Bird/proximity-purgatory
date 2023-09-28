@@ -69,7 +69,6 @@ function on_message(self, message_id, message, sender)
         end
         self.moving = true
     elseif message_id == hash("win") then
-        print("win")
         self.spawning = false
         timer.delay(5, false, function()
             self.moving = false
