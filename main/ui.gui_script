@@ -20,23 +20,6 @@ local postTo = {
 	"spawn_spikes#spike_controller",
 }
 
-local function increase_score()
-	if INCREASE_SCORE == true then
-		score = score + 1
-		gui.set_text(scoretext, "SCORE: "..tostring(score))
-
-		if score == 3000 then
-			INCREASE_SCORE = false
-
-			for _, receiver in pairs(postTo) do
-				msg.post(receiver, "win")
-			end
-			
-			gui.set_text(scoretext, "SCORE: MY HERO!!!!!!!!")
-		end
-	end
-end
-
 function on_message(self, message_id, message, sender)
 	if message_id == MSG_DAMAGE then
 		local enable = {
