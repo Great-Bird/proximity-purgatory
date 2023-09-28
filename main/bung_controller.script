@@ -37,7 +37,7 @@ function update(self, dt)
     size_min = math_util.lerp(0.8, 1.2, self.elapsed_time / 100)
     size_max = math_util.lerp(1.2, 1.5, self.elapsed_time / 100)
     spawn_time_min = math_util.lerp(1.5, 0.5, self.elapsed_time / 80)
-    spawn_time_max = math_util.lerp(4, 3, self.elapsed_time / 80)
+    spawn_time_max = math_util.lerp(4, 1.5, self.elapsed_time / 80)
 
     if self.elapsed_time >= self.next_spawn then
         self.next_spawn = self.next_spawn + math_util.random_snap(spawn_time_min, spawn_time_max, spawn_time_snap)
