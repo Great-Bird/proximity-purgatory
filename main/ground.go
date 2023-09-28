@@ -2,7 +2,7 @@ embedded_components {
   id: "collisionobject"
   type: "collisionobject"
   data: "collision_shape: \"\"\n"
-  "type: COLLISION_OBJECT_TYPE_STATIC\n"
+  "type: COLLISION_OBJECT_TYPE_KINEMATIC\n"
   "mass: 0.0\n"
   "friction: 1.0\n"
   "restitution: 0.5\n"
