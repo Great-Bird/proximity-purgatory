@@ -33,7 +33,6 @@ function on_message(self, message_id, message, sender)
     local player_go = go.get_id("player")
     if message_id == MSG_CONTACT_POINT_RESPONSE then
         if message.other_id == player_go and self.moving then
-            print("colldie")
             local send_to = {
                 "UI",
                 "player#player",

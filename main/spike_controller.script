@@ -12,9 +12,25 @@ function init(self)
     self.next_spawn = 1
     self.bungs = {}
     self.speed = 260
+    self.moving = false
 end
 
 function update(self, dt)
+    if self.moving then
+        self.speed = math_util.lerp(260, 660, self.elapsed_time / 100)
+        for _, spike in ipairs(self.bungs) do
+            go.set_position(go.get_position(spike) + vmath.vector3(-self.speed * dt, 0, 0), spike)
+        end
+
+        for i = #self.bungs, 1, -1 do
+            local spike = self.bungs[i]
+            if go.get_position(spike).x < DELETE_POINT then
+                go.delete(spike)
+                table.remove(self.bungs, i)
+            end
+        end
+    end
+
     if not self.spawning then
         return
     end
@@ -29,21 +45,6 @@ function update(self, dt)
         go.set_scale(2, id)
         table.insert(self.bungs, id)
     end
-
-    if self.spawning then
-        self.speed = math_util.lerp(260, 660, self.elapsed_time / 100)
-        for _, spike in ipairs(self.bungs) do
-            go.set_position(go.get_position(spike) + vmath.vector3(-self.speed * dt, 0, 0), spike)
-        end
-
-        for i = #self.bungs, 1, -1 do
-            local spike = self.bungs[i]
-            if go.get_position(spike).x < DELETE_POINT then
-                go.delete(spike)
-                table.remove(self.bungs, i)
-            end
-        end
-    end
 end
 
 function on_message(self, message_id, message, sender)
@@ -54,6 +55,7 @@ function on_message(self, message_id, message, sender)
             end
         end
         self.spawning = false
+        self.moving = false
     elseif message_id == hash("start") then
         self.spawning = true
         self.elapsed_time = 0
@@ -65,7 +67,12 @@ function on_message(self, message_id, message, sender)
             end
             self.bungs[i] = nil
         end
+        self.moving = true
     elseif message_id == hash("win") then
+        print("win")
         self.spawning = false
+        timer.delay(5, false, function()
+            self.moving = false
+        end)
     end
 end

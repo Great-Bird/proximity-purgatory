@@ -44,6 +44,7 @@ function on_message(self, message_id, message, sender)
 		self.speeding_up = false
 		timer.delay(5, false, function()
 			if self.moving then
+				self.speed = 260
 				timer.delay(2, false, function()
 					self.moving = false
 					timer.delay(3, false, function()
