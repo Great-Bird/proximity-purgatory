@@ -11,6 +11,7 @@ function init(self)
     -- self.original_pos = go.get_position().x
     -- self.distance = self.original_pos - DELETE_POINT
     -- self.time = self.distance / self.speed
+    self.moving = true
 
     -- local function delete()
     --     local current_x = go.get_position().x
@@ -32,6 +33,7 @@ function on_message(self, message_id, message, sender)
     local player_go = go.get_id("player")
     if message_id == MSG_CONTACT_POINT_RESPONSE then
         if message.other_id == player_go and self.moving then
+            print("colldie")
             local send_to = {
                 "UI",
                 "player#player",
