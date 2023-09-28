@@ -1,7 +1,7 @@
 local SPEED = 400
 
 function init(self)
-    print("init() called")
+    msg.post("#sprite", "disable")
 
     local window_width, window_height = window.get_size()
     local blob_width = go.get("#sprite", "size.x")
