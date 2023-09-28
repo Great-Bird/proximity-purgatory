@@ -214,6 +214,11 @@ function on_message(self, message_id, message, sender)
 		end
 	elseif message_id == MSG_DAMAGE then
 		sprite.play_flipbook("#sprite", hash("player_death"))
+
+		timer.delay(0.25, false, function()
+			sound.play("#slurp")
+		end)
+		
 		self.updating = false
 	elseif message_id == MSG_START then
 		set_default_state(self)
