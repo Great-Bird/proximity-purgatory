@@ -181,8 +181,10 @@ function on_message(self, message_id, message, sender)
 		if message.group == GROUP_OBSTACLES then
 			resolve_collision(self, message)
 			-- create_marker(self, message.position, 0.5)
+		elseif message.group == hash("killbricks") then
+			print("took damage from", message.other_id)
 		end
 	elseif message_id == MSG_DAMAGE then
-		print("took damage from", message.source)
+		print("stop firing me")
 	end
 end

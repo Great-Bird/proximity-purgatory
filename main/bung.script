@@ -4,7 +4,7 @@ function on_message(self, message_id, message, sender)
     -- local player_go = go.get_id("player")
     -- if message_id == MSG_CONTACT_POINT_RESPONSE then
     --     if message.other_id == player_go then
-    --         msg.post(player_go, "damage", { source = "spikes" })
+    --         msg.post(player_go, "damage", { source = "bung" })
     --     end
     -- end
 end

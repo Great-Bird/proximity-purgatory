@@ -1,6 +1,6 @@
-local pieces = { "ground0", "ground1", "ground2", "ground3",
+local ground_pieces = { "ground0", "ground1", "ground2", "ground3",
 	"ground4", "ground5", "ground6", "ground7", "ground8", "ground9" }
-local piece_size_x = 158
+local ground_piece_size_x = 158
 
 function init(self)
 	self.speed = 240
@@ -8,10 +8,10 @@ end
 
 function fixed_update(self, dt)
 	local offset_amount = math.floor(self.speed * dt)
-	for i, p in ipairs(pieces) do
+	for i, p in ipairs(ground_pieces) do
 		local pos = go.get_position(p)
-		if pos.x <= -piece_size_x * 1.5 then
-			pos.x = pos.x + (#pieces - 1) * piece_size_x
+		if pos.x <= -ground_piece_size_x * 1.5 then
+			pos.x = pos.x + (#ground_pieces - 1) * ground_piece_size_x
 		end
 		pos.x = pos.x - offset_amount
 		go.set_position(pos, p)
