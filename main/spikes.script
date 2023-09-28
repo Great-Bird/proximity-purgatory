@@ -2,9 +2,11 @@ local MSG_CONTACT_POINT_RESPONSE = hash("contact_point_response")
 
 function on_message(self, message_id, message, sender)
     local player_go = go.get_id("player")
+    local gui_go = go.get_id("UI")
     if message_id == MSG_CONTACT_POINT_RESPONSE then
         if message.other_id == player_go then
             msg.post(player_go, "damage", { source = "spikes" })
+            msg.post(gui_go, "damage", { source = "spikes" })
         end
     end
 end
