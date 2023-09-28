@@ -512,7 +512,7 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "princess bungessa"
+  id: "princess_bungessa"
   data: "embedded_components {\n"
   "  id: \"sprite\"\n"
   "  type: \"sprite\"\n"
@@ -535,8 +535,8 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: 1906.0
-    y: 137.0
+    x: 1263.0
+    y: 204.0
     z: 0.0
   }
   rotation {
@@ -563,7 +563,7 @@ embedded_instances {
   "\"\n"
   "  position {\n"
   "    x: 0.0\n"
-  "    y: 162.0\n"
+  "    y: 0.0\n"
   "    z: 0.0\n"
   "  }\n"
   "  rotation {\n"
@@ -580,8 +580,8 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: 1905.0
-    y: -1.0
+    x: 1262.0
+    y: 229.0
     z: 0.5
   }
   rotation {

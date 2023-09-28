@@ -1,4 +1,5 @@
-local score = 0
+local TIME_TO_HERO = 60 * 2 + 29
+local MAX_SCORE = 3000
 
 local frame 
 local start 
@@ -8,12 +9,6 @@ local gameover
 local youdied
 
 local MSG_DAMAGE = hash("damage")
-
-local function increase_score()
-	score = score + 1
-	
-	gui.set_text(scoretext, "SCORE: "..tostring(score))
-end
 
 function on_message(self, message_id, message, sender)
 	if message_id == MSG_DAMAGE then
@@ -37,10 +32,16 @@ function init(self)
 	restartbutton = gui.get_node("RESTART")
 	gameover = gui.get_node("GAMEOVER")
 	youdied = gui.get_node("YOUDIED")
+	self.score = 0
+	self.elapsed_time = 0
 	
 	msg.post(".", "acquire_input_focus")
-	
-	timer.delay(0.05, true, increase_score)
+end
+
+function update(self, dt)
+	self.elapsed_time = self.elapsed_time + dt
+	self.score = math.min(math.ceil(self.elapsed_time / TIME_TO_HERO * MAX_SCORE), MAX_SCORE)
+	gui.set_text(scoretext, "SCORE: "..tostring(self.score))
 end
 
 function on_input(self, action_id, action)

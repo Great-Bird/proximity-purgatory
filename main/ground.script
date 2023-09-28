@@ -3,10 +3,15 @@ local ground_pieces = { "ground0", "ground1", "ground2", "ground3",
 local ground_piece_size_x = 158
 
 function init(self)
+	self.moving = true
 	self.speed = 320
 end
 
 function update(self, dt)
+	if not self.moving then
+		return
+	end
+
 	local offset_amount = self.speed * dt
 	for i, p in ipairs(ground_pieces) do
 		local pos = go.get_position(p)
@@ -15,5 +20,17 @@ function update(self, dt)
 		end
 		pos.x = pos.x - offset_amount
 		go.set_position(pos, p)
+	end
+end
+
+local function spawn_princess(self, handle, time_elapsed)
+	
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("win") then
+		timer.delay(3, false, function()
+			self.moving = false
+		end)
 	end
 end
