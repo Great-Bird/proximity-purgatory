@@ -3,6 +3,7 @@ local ANIM_IDLE = hash("player_idle")
 local ANIM_JUMP = hash("player_jump")
 local ANIM_PUNCH = hash("player_punch")
 local ANIM_SLASH = hash("player_slash")
+local MSG_DAMAGE = hash("damage")
 local MSG_CONTACT_POINT_RESPONSE = hash("contact_point_response")
 local INPUT_LEFT = hash("left")
 local INPUT_RIGHT = hash("right")
@@ -68,18 +69,6 @@ local function update_animations(self)
 	sprite.set_hflip("#sprite", self.faced_direction < 0)
 
 	if self.ground_contact then
-		-- if math.abs(self.velocity.x) > 0 then
-		-- 	if self.anim ~= ANIM_RUN then
-		-- 		sprite.play_flipbook("#sprite", ANIM_RUN)
-		-- 		self.anim = ANIM_RUN
-		-- 		print("set to run")
-		-- 	end
-		-- else
-		-- 	if self.anim ~= ANIM_IDLE then
-		-- 		sprite.play_flipbook("#sprite", ANIM_IDLE)
-		-- 		self.anim = ANIM_IDLE
-		-- 	end
-		-- end
 		if self.anim ~= ANIM_RUN then
 			sprite.play_flipbook("#sprite", ANIM_RUN)
 			self.anim = ANIM_RUN
@@ -193,5 +182,7 @@ function on_message(self, message_id, message, sender)
 			resolve_collision(self, message)
 			-- create_marker(self, message.position, 0.5)
 		end
+	elseif message_id == MSG_DAMAGE then
+		print("took damage from", message.source)
 	end
 end
