@@ -56,6 +56,10 @@ function init(self)
 	msg.post(".", "acquire_input_focus")
 end
 
+local function setThatShiTroy()
+	gui.set_text(scoretext, "SCORE: MY HERO!!!!!!!")
+end
+
 function update(self, dt)
 	if INCREASE_SCORE then
 		self.elapsed_time = self.elapsed_time + dt
@@ -64,7 +68,7 @@ function update(self, dt)
 
 		if self.score == MAX_SCORE then
 			INCREASE_SCORE = false
-			gui.set_text(scoretext, "SCORE: MY HERO!!!!!!!")
+			timer.delay(5, false, setThatShiTroy)
 
 			for _, send in pairs(postTo) do
 				msg.post(send, "win")
