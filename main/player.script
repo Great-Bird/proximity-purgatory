@@ -1,3 +1,8 @@
+local ANIM_RUN = hash("player_run")
+local ANIM_IDLE = hash("player_idle")
+local ANIM_JUMP = hash("player_jump")
+local ANIM_PUNCH = hash("player_punch")
+local ANIM_SLASH = hash("player_slash")
 local MSG_CONTACT_POINT_RESPONSE = hash("contact_point_response")
 local INPUT_LEFT = hash("left")
 local INPUT_RIGHT = hash("right")
@@ -10,36 +15,36 @@ local JUMP_TAKEOFF_SPEED = 1200
 local WALK_SPEED = 500
 local CLIPUP_PIXELS = 20
 
-local function find(t, value)
-	for i, v in ipairs(t) do
-		if v == value then
-			return i
-		end
-	end
-end
+-- local function find(t, value)
+-- 	for i, v in ipairs(t) do
+-- 		if v == value then
+-- 			return i
+-- 		end
+-- 	end
+-- end
 
-local function create_marker(self, pos, time)
-	local marker_id = factory.create("#marker_factory", pos)
-	if #self.debug_markers > 5 then
-		local a = table.remove(self.debug_markers, 1)
-		msg.post(a, "disable")
-	end
+-- local function create_marker(self, pos, time)
+-- 	local marker_id = factory.create("#marker_factory", pos)
+-- 	if #self.debug_markers > 5 then
+-- 		local a = table.remove(self.debug_markers, 1)
+-- 		msg.post(a, "disable")
+-- 	end
 
-	local sprite_url = msg.url(nil, marker_id, "sprite")
-	go.set(sprite_url, "tint", vmath.vector4(1, 0, 0, 1))
+-- 	local sprite_url = msg.url(nil, marker_id, "sprite")
+-- 	go.set(sprite_url, "tint", vmath.vector4(1, 0, 0, 1))
 
-	table.insert(self.debug_markers, marker_id)
+-- 	table.insert(self.debug_markers, marker_id)
 
-	timer.delay(time, false, function()
-		if marker_id then
-			local index = find(self.debug_markers, marker_id)
-			if index then
-				table.remove(self.debug_markers, index)
-			end
-			go.delete(marker_id)
-		end
-	end)
-end
+-- 	timer.delay(time, false, function()
+-- 		if marker_id then
+-- 			local index = find(self.debug_markers, marker_id)
+-- 			if index then
+-- 				table.remove(self.debug_markers, index)
+-- 			end
+-- 			go.delete(marker_id)
+-- 		end
+-- 	end)
+-- end
 
 local function set_default_state(self)
 	self.velocity = vmath.vector3()
@@ -61,6 +66,26 @@ end
 
 local function update_animations(self)
 	sprite.set_hflip("#sprite", self.faced_direction < 0)
+
+	if self.ground_contact then
+		if math.abs(self.velocity.x) > 0 then
+			if self.anim ~= ANIM_RUN then
+				sprite.play_flipbook("#sprite", ANIM_RUN)
+				self.anim = ANIM_RUN
+				print("set to run")
+			end
+		else
+			if self.anim ~= ANIM_IDLE then
+				sprite.play_flipbook("#sprite", ANIM_IDLE)
+				self.anim = ANIM_IDLE
+			end
+		end
+	else
+		if self.anim ~= ANIM_JUMP then
+			sprite.play_flipbook("#sprite", ANIM_IDLE)
+			self.anim = ANIM_IDLE
+		end
+	end
 end
 
 function fixed_update(self, dt)
@@ -96,6 +121,9 @@ local function jump(self)
 	end
 	self.ground_contact = false
 	self.velocity.y = JUMP_TAKEOFF_SPEED
+
+	self.anim = ANIM_JUMP
+	sprite.play_flipbook("#sprite", ANIM_JUMP)
 end
 
 local function abort_jump(self)
@@ -127,7 +155,6 @@ local function resolve_collision(self, message)
 	if distance > 0 then
 		local proj = vmath.project(self.correction, normal * distance)
 		if proj < 1 then
-			print("pushing")
 			local compensation = (distance - distance * proj) * normal
 			go.set_position(go.get_position() + compensation)
 			self.correction = self.correction + compensation
@@ -159,7 +186,7 @@ function on_message(self, message_id, message, sender)
 	if message_id == MSG_CONTACT_POINT_RESPONSE then
 		if message.group == GROUP_OBSTACLES then
 			resolve_collision(self, message)
-			create_marker(self, message.position, 0.5)
+			-- create_marker(self, message.position, 0.5)
 		end
 	end
 end
