@@ -22,7 +22,6 @@ function update(self, dt)
     if not self.spawning then
         return
     end
-
     self.elapsed_time = self.elapsed_time + dt
 
     if self.elapsed_time >= self.next_spawn then

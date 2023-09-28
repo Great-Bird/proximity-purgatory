@@ -3,7 +3,7 @@ local ground_pieces = { "ground0", "ground1", "ground2", "ground3",
 local ground_piece_size_x = 158
 
 function init(self)
-	self.moving = true
+	self.moving = false
 	self.speed = 320
 	self.move_princess = false
 end
@@ -35,5 +35,9 @@ function on_message(self, message_id, message, sender)
 			self.moving = false
 		end)
 		self.move_princess = true
+	elseif message_id == hash("damage") then
+		self.moving = false
+	elseif message_id == hash("start") then
+		self.moving = true
 	end
 end

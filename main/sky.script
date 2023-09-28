@@ -5,9 +5,14 @@ local piece_size_x = 79*8
 
 function init(self)
 	self.speed = SPEED
+	self.moving = false
 end
 
 function fixed_update(self, dt)
+	if not self.moving then
+		return
+	end
+
 	local offset_amount = math.floor(self.speed * dt)
 	for i, p in ipairs(pieces) do
 		local pos = go.get_position(p)
@@ -16,5 +21,13 @@ function fixed_update(self, dt)
 		end
 		pos.x = pos.x - offset_amount
 		go.set_position(pos, p)
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("damage") then
+		self.moving = false
+	elseif message_id == hash("start") then
+		self.moving = true
 	end
 end

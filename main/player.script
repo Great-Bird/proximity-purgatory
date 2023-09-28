@@ -54,7 +54,6 @@ local function set_default_state(self)
 	self.faced_direction = 1
 	self.ground_contact = true
 	self.wall_contact = false
-	self.updating = true
 
 	go.set_position(vmath.vector3(62, 226, 0))
 end
@@ -63,6 +62,7 @@ function init(self)
 	self.debug_markers = {}
 
 	set_default_state(self)
+	self.updating = false
 
 	msg.post(".", "acquire_input_focus")
 end
@@ -198,5 +198,6 @@ function on_message(self, message_id, message, sender)
 		self.updating = false
 	elseif message_id == MSG_START then
 		set_default_state(self)
+		self.updating = true
 	end
 end
