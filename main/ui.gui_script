@@ -8,11 +8,17 @@ local gameover
 local youdied
 
 local MSG_DAMAGE = hash("damage")
+local INCREASE_SCORE = false
 
 local function increase_score()
-	score = score + 1
-	
-	gui.set_text(scoretext, "SCORE: "..tostring(score))
+	if INCREASE_SCORE == true then
+		score = score + 1
+		gui.set_text(scoretext, "SCORE: "..tostring(score))
+
+		if score == 3000 then
+			msg.post("ground_controller#ground", "win")
+		end
+	end
 end
 
 function on_message(self, message_id, message, sender)
@@ -27,6 +33,9 @@ function on_message(self, message_id, message, sender)
 		for _, node in pairs(enable) do
 			gui.set_enabled(node, true)
 		end
+
+		INCREASE_SCORE = false
+		score = 0
 	end
 end
 
@@ -61,6 +70,8 @@ function on_input(self, action_id, action)
 			for _, receiver in pairs(postTo) do
 				msg.post(receiver, "start")
 			end
+
+			INCREASE_SCORE = true
 		end
 	elseif gui.pick_node(restartbutton, action.x, action.y) and gui.is_enabled(restartbutton) == true then	
 		if action.released and action_id == hash("touch") then
@@ -81,6 +92,8 @@ function on_input(self, action_id, action)
 			for _, receiver in pairs(postTo) do
 				msg.post(receiver, "start")
 			end
+
+			INCREASE_SCORE = true
 		end	
 	end
 end
