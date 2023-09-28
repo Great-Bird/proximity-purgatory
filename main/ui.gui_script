@@ -35,6 +35,7 @@ function on_message(self, message_id, message, sender)
 
 		INCREASE_SCORE = false
 		self.score = 0
+		self.elapsed_time = 0
 	end
 end
 
@@ -56,6 +57,15 @@ function update(self, dt)
 	if INCREASE_SCORE then
 		self.score = math.min(math.ceil(self.elapsed_time / TIME_TO_HERO * MAX_SCORE), MAX_SCORE)
 		gui.set_text(scoretext, "SCORE: "..tostring(self.score))
+
+		if self.score == MAX_SCORE then
+			INCREASE_SCORE = false
+			gui.set_text(scoretext, "SCORE: MY HERO!!!!!!!")
+
+			for _, send in pairs(postTo) do
+				msg.post(send, "win")
+			end
+		end
 	end
 end
 
