@@ -43,7 +43,7 @@ instances {
   id: "ground0"
   prototype: "/main/ground.go"
   position {
-    x: 0.0
+    x: -102.0
     y: 70.0
     z: 0.0
   }
@@ -63,7 +63,7 @@ instances {
   id: "ground1"
   prototype: "/main/ground.go"
   position {
-    x: 158.0
+    x: 56.0
     y: 70.0
     z: 0.0
   }
@@ -83,7 +83,7 @@ instances {
   id: "ground2"
   prototype: "/main/ground.go"
   position {
-    x: 316.0
+    x: 214.0
     y: 70.0
     z: 0.0
   }
@@ -103,7 +103,7 @@ instances {
   id: "ground3"
   prototype: "/main/ground.go"
   position {
-    x: 474.0
+    x: 372.0
     y: 70.0
     z: 0.0
   }
@@ -123,7 +123,7 @@ instances {
   id: "ground4"
   prototype: "/main/ground.go"
   position {
-    x: 632.0
+    x: 530.0
     y: 70.0
     z: 0.0
   }
@@ -143,7 +143,7 @@ instances {
   id: "ground5"
   prototype: "/main/ground.go"
   position {
-    x: 790.0
+    x: 688.0
     y: 70.0
     z: 0.0
   }
@@ -163,7 +163,7 @@ instances {
   id: "ground6"
   prototype: "/main/ground.go"
   position {
-    x: 948.0
+    x: 846.0
     y: 70.0
     z: 0.0
   }
@@ -183,7 +183,7 @@ instances {
   id: "ground7"
   prototype: "/main/ground.go"
   position {
-    x: 1106.0
+    x: 1004.0
     y: 70.0
     z: 0.0
   }
@@ -203,7 +203,7 @@ instances {
   id: "ground8"
   prototype: "/main/ground.go"
   position {
-    x: 1264.0
+    x: 1162.0
     y: 70.0
     z: 0.0
   }
@@ -223,7 +223,7 @@ instances {
   id: "ground9"
   prototype: "/main/ground.go"
   position {
-    x: 1422.0
+    x: 1320.0
     y: 70.0
     z: 0.0
   }
