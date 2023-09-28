@@ -55,7 +55,7 @@ function on_input(self, action_id, action)
 				"music#music",
 				"sky_controller#sky",
 				"spawn_bungs#bung_controller",
-				"spikes#spikes",
+				"spawn_spikes#spike_controller",
 			}
 
 			for _, receiver in pairs(postTo) do
@@ -73,7 +73,7 @@ function on_input(self, action_id, action)
 				"music#music",
 				"sky_controller#sky",
 				"spawn_bungs#bung_controller",
-				"spikes#spikes",
+				"spawn_spikes#spike_controller",
 			}
 
 			for _, receiver in pairs(postTo) do
