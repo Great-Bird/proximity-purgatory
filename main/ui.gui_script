@@ -1,5 +1,21 @@
+local score = 0
+
+local frame 
+local button 
+local scoretext 
+
+local function increase_score()
+	score = score + 1
+	gui.set_text(scoretext, "SCORE: "..tostring(score))
+end
+
 function init(self)
+	frame = gui.get_node("COVER")
+	button = gui.get_node("START")
+	scoretext = gui.get_node("SCORE")
+	
 	msg.post(".", "acquire_input_focus")
+	timer.delay(0.05, true, increase_score)
 end
 
 function update(self, dt)
@@ -9,8 +25,6 @@ function update(self, dt)
 end
 
 function on_input(self, action_id, action)
-	local frame = gui.get_node("COVER")
-	local button = gui.get_node("START")
 	if gui.pick_node(button, action.x, action.y) and action.released and action_id == hash("touch") then
 		gui.set_alpha(frame, 0)
 		gui.set_alpha(button, 0)
