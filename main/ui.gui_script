@@ -10,14 +10,27 @@ local youdied
 local MSG_DAMAGE = hash("damage")
 local INCREASE_SCORE = false
 
+local postTo = {
+	"player#player",
+	"ground_controller#ground",
+	"music#music",
+	"sky_controller#sky",
+	"spawn_bungs#bung_controller",
+	"spawn_spikes#spike_controller",
+}
+
 local function increase_score()
 	if INCREASE_SCORE == true then
 		score = score + 1
 		gui.set_text(scoretext, "SCORE: "..tostring(score))
 
-		if score == 400 then
+		if score == 3000 then
 			INCREASE_SCORE = false
-			msg.post("ground_controller#ground", "win")
+
+			for _, receiver in pairs(postTo) do
+				msg.post(receiver, "win")
+			end
+			
 			gui.set_text(scoretext, "SCORE: MY HERO!!!!!!!!")
 		end
 	end
@@ -59,16 +72,7 @@ function on_input(self, action_id, action)
 		if action.released and action_id == hash("touch") then
 			gui.set_enabled(frame, false)
 			gui.set_enabled(start, false)
-
-			local postTo = {
-				"player#player",
-				"ground_controller#ground",
-				"music#music",
-				"sky_controller#sky",
-				"spawn_bungs#bung_controller",
-				"spawn_spikes#spike_controller",
-			}
-
+			
 			for _, receiver in pairs(postTo) do
 				msg.post(receiver, "start")
 			end
@@ -82,15 +86,6 @@ function on_input(self, action_id, action)
 			gui.set_enabled(gameover, false)
 			gui.set_enabled(youdied, false)
 			
-			local postTo = {
-				"player#player",
-				"ground_controller#ground",
-				"music#music",
-				"sky_controller#sky",
-				"spawn_bungs#bung_controller",
-				"spawn_spikes#spike_controller",
-			}
-
 			for _, receiver in pairs(postTo) do
 				msg.post(receiver, "start")
 			end
