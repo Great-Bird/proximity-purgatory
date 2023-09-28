@@ -5,11 +5,17 @@ local spawn_time_max = 4
 local spawn_time_snap = 1
 
 function init(self)
+    self.spawning = false
     self.elapsed_time = 0
     self.next_spawn = 1
+    self.bungs = {}
 end
 
 function update(self, dt)
+    if not self.spawning then
+        return
+    end
+
     self.elapsed_time = self.elapsed_time + dt
 
     if self.elapsed_time >= self.next_spawn then
@@ -18,5 +24,23 @@ function update(self, dt)
         local spawn_pos = go.get_position() + vmath.vector3(0, 0, -0.5)
         local id = factory.create("#spike_factory", spawn_pos)
         go.set_scale(2, id)
+        table.insert(self.bungs, id)
+    end
+end
+
+function on_message(self, message_id, message, sender)
+    if message_id == hash("damage") then
+        for _, id in ipairs(self.bungs) do
+            msg.post(id, "damage", message)
+        end
+        self.spawning = false
+    elseif message_id == hash("start") then
+        self.spawning = true
+        self.elapsed_time = 0
+        self.next_spawn = 1
+        for i, id in ipairs(self.bungs) do
+            go.delete(id)
+            self.bungs[i] = nil
+        end
     end
 end
