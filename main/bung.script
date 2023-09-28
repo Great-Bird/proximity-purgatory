@@ -1,5 +1,30 @@
 local MSG_CONTACT_POINT_RESPONSE = hash("contact_point_response")
 
+local DELETE_POINT = -250
+
+function init(self)
+    self.speed = 500
+    self.original_pos = go.get_position().x
+    self.distance = self.original_pos - DELETE_POINT
+    self.time = self.distance / self.speed
+
+    local function delete()
+        local current_x = go.get_position().x
+        if current_x + self.distance < self.original_pos then
+            go.delete()
+            print("ay")
+        else
+            timer.delay((current_x - DELETE_POINT) / self.speed, false, delete)
+        end
+    end
+
+    timer.delay(self.time, false, delete)
+end
+
+function update(self, dt)
+    go.set_position(go.get_position() + vmath.vector3(-self.speed * dt, 0, 0))
+end
+
 function on_message(self, message_id, message, sender)
     local player_go = go.get_id("player")
     if message_id == MSG_CONTACT_POINT_RESPONSE then

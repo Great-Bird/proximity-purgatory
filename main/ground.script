@@ -6,7 +6,7 @@ function init(self)
 	self.speed = 240
 end
 
-function fixed_update(self, dt)
+function update(self, dt)
 	local offset_amount = math.floor(self.speed * dt)
 	for i, p in ipairs(ground_pieces) do
 		local pos = go.get_position(p)
