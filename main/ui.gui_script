@@ -60,6 +60,12 @@ local function setThatShiTroy()
 	gui.set_text(scoretext, "SCORE: MY HERO!!!!!!!")
 end
 
+local function winThatShiTroy()
+	for _, send in pairs(postTo) do
+		msg.post(send, "win")
+	end
+end
+
 function update(self, dt)
 	if INCREASE_SCORE then
 		self.elapsed_time = self.elapsed_time + dt
@@ -70,9 +76,7 @@ function update(self, dt)
 			INCREASE_SCORE = false
 			timer.delay(5, false, setThatShiTroy)
 
-			for _, send in pairs(postTo) do
-				msg.post(send, "win")
-			end
+			winThatShiTroy()
 		end
 	end
 end
@@ -86,6 +90,8 @@ function on_input(self, action_id, action)
 			for _, receiver in pairs(postTo) do
 				msg.post(receiver, "start")
 			end
+
+			timer.delay(10, false, winThatShiTroy)
 
 			INCREASE_SCORE = true
 		end
