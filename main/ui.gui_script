@@ -65,7 +65,9 @@ function on_input(self, action_id, action)
 	elseif gui.pick_node(restartbutton, action.x, action.y) and gui.is_enabled(restartbutton) == true then	
 		if action.released and action_id == hash("touch") then
 			gui.set_enabled(frame, false)
-			gui.set_enabled(start, false)
+			gui.set_enabled(restartbutton, false)
+			gui.set_enabled(gameover, false)
+			gui.set_enabled(youdied, false)
 			
 			local postTo = {
 				"player#player",
