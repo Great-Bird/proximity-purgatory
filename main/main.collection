@@ -14,9 +14,9 @@ instances {
     w: 1.0
   }
   scale3 {
-    x: 3.0096
-    y: 3.0096
-    z: 3.0096
+    x: 2.0
+    y: 2.0
+    z: 2.0
   }
 }
 instances {
