@@ -1,5 +1,7 @@
 local math_util = require "main.math_util"
 
+local DELETE_POINT = -250
+
 local spawn_time_min = 1
 local spawn_time_max = 4
 local spawn_time_snap = 1
@@ -9,6 +11,7 @@ function init(self)
     self.elapsed_time = 0
     self.next_spawn = 1
     self.bungs = {}
+    self.speed = 260
 end
 
 function update(self, dt)
@@ -25,6 +28,21 @@ function update(self, dt)
         local id = factory.create("#spike_factory", spawn_pos)
         go.set_scale(2, id)
         table.insert(self.bungs, id)
+    end
+
+    if self.spawning then
+        self.speed = math_util.lerp(260, 660, self.elapsed_time / 10)
+        for _, spike in ipairs(self.bungs) do
+            go.set_position(go.get_position(spike) + vmath.vector3(-self.speed * dt, 0, 0), spike)
+        end
+
+        for i = #self.bungs, 1, -1 do
+            local spike = self.bungs[i]
+            if go.get_position(spike).x < DELETE_POINT then
+                go.delete(spike)
+                table.remove(self.bungs, i)
+            end
+        end
     end
 end
 

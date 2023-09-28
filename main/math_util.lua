@@ -9,4 +9,9 @@ function module.random_snap(min, max, snap)
     return min + math.random(0, math.floor((max - min) / snap)) * snap
 end
 
+function module.lerp(a, b, t)
+    t = math.min(math.max(t, 0), 1)
+    return a * (1 - t) + (b * t)
+end
+
 return module

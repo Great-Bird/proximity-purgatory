@@ -1,16 +1,26 @@
+local math_util = require "main.math_util"
+
 local ground_pieces = { "ground0", "ground1", "ground2", "ground3",
 	"ground4", "ground5", "ground6", "ground7", "ground8", "ground9" }
 local ground_piece_size_x = 158
 
 function init(self)
 	self.moving = false
-	self.speed = 320
+	self.speed = 260
 	self.move_princess = false
+	self.speeding_up = true
+	self.accumulated_time = 0
 end
 
 function update(self, dt)
 	if not self.moving then
 		return
+	end
+	
+	self.accumulated_time = self.accumulated_time + dt
+
+	if self.speeding_up then
+		self.speed = math_util.lerp(260, 660, self.accumulated_time / 10)
 	end
 
 	local offset_amount = -self.speed * dt
@@ -31,6 +41,7 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("win") then
+		self.speeding_up = false
 		timer.delay(5, false, function()
 			if self.moving then
 				timer.delay(2, false, function()
@@ -46,5 +57,7 @@ function on_message(self, message_id, message, sender)
 		self.moving = false
 	elseif message_id == hash("start") then
 		self.moving = true
+		self.speeding_up = true
+		self.accumulated_time = 0
 	end
 end
