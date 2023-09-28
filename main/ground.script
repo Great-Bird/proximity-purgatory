@@ -5,6 +5,11 @@ local ground_piece_size_x = 158
 function init(self)
 	self.moving = true
 	self.speed = 320
+	self.move_princess = false
+	timer.delay(2, false, function()
+		self.moving = false
+	end)
+	self.move_princess = true
 end
 
 function update(self, dt)
@@ -12,25 +17,27 @@ function update(self, dt)
 		return
 	end
 
-	local offset_amount = self.speed * dt
+	local offset_amount = -self.speed * dt
 	for i, p in ipairs(ground_pieces) do
 		local pos = go.get_position(p)
 		if pos.x <= -ground_piece_size_x * 1.5 then
 			pos.x = pos.x + (#ground_pieces - 1) * ground_piece_size_x
 		end
-		pos.x = pos.x - offset_amount
+		pos.x = pos.x + offset_amount
 		go.set_position(pos, p)
 	end
-end
 
-local function spawn_princess(self, handle, time_elapsed)
-	
+	if self.move_princess then
+		go.set_position(go.get_position("princess_bungessa") + vmath.vector3(offset_amount, 0, 0), "princess_bungessa")
+		go.set_position(go.get_position("cage") + vmath.vector3(offset_amount, 0, 0), "cage")
+	end
 end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("win") then
-		timer.delay(3, false, function()
+		timer.delay(2, false, function()
 			self.moving = false
 		end)
+		self.move_princess = true
 	end
 end
