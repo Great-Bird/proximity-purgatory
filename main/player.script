@@ -213,7 +213,7 @@ function on_message(self, message_id, message, sender)
 		set_default_state(self)
 		self.updating = true
 	elseif message_id == hash("win") then
-		timer.delay(5, false, function ()
+		timer.delay(8, false, function ()
 			self.running = false
 		end)
 	end

@@ -1,4 +1,4 @@
-local TIME_TO_HERO = 2--60 * 2 + 24
+local TIME_TO_HERO = 60 * 2 + 24
 local MAX_SCORE = 3000
 
 local frame 
