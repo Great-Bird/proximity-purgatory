@@ -6,10 +6,6 @@ function init(self)
 	self.moving = true
 	self.speed = 320
 	self.move_princess = false
-	timer.delay(2, false, function()
-		self.moving = false
-	end)
-	self.move_princess = true
 end
 
 function update(self, dt)
